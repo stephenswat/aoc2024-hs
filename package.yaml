@@ -1,0 +1,22 @@
+name:                aoc2024
+version:             1.0.0.0
+github:              "stephenswat/aoc2024-hs"
+license:             Unlicense
+author:              "Stephen Nicholas Swatman"
+maintainer:          "stephen@v25.nl"
+
+dependencies:
+  - base >= 4.16 && < 5
+  - parsec
+  - containers
+  - mtl
+  - pqueue
+
+executables:
+  aoc2024:
+    main:                Main.hs
+    source-dirs:         src
+    ghc-options:
+      - -Wall
+      - -Wcompat
+      - -O3
