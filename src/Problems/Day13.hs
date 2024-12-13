@@ -35,23 +35,18 @@ solveLinEq (aax, aay, abx, aby, yx, yy)
     | otherwise = Nothing
     where
         lcm1 = lcm aax aay
-        aax1 = lcm1
         abx1 = (lcm1 `div` aax) * abx
         aby1 = (lcm1 `div` aay) * aby
         yx1 = (lcm1 `div` aax) * yx
         yy1 = (lcm1 `div` aay) * yy
-        aax2 = aax1
-        abx2 = abx1
-        yx2 = yx1
         aby2 = aby1 - abx1
         yy2 = yy1 - yx1
-        lcm2 = lcm abx2 aby2
-        aax3 = (lcm2 `div` abx2) * aax2
-        aby3 = lcm2
-        yx3 = (lcm2 `div` abx2) * yx2
+        lcm2 = lcm abx1 aby2
+        aax3 = (lcm2 `div` abx1) * lcm1
+        yx3 = (lcm2 `div` abx1) * yx1
         yy3 = (lcm2 `div` aby2) * yy2
         (x, xm) = (yx3 - yy3) `divMod` aax3
-        (y, ym) = yy3 `divMod` aby3
+        (y, ym) = yy3 `divMod` lcm2
 
 cost :: (Integer, Integer) -> Integer
 cost (a, b)
