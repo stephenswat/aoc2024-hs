@@ -11,6 +11,8 @@ dependencies:
   - containers
   - mtl
   - pqueue
+  - split
+  - extra
 
 executables:
   aoc2024:
