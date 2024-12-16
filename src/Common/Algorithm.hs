@@ -4,15 +4,15 @@ import Data.PQueue.Prio.Min (null, insert, deleteFindMin, empty)
 import Data.Set (Set, map, unions, member, insert, empty, notMember)
 import Data.Map (insertWith, fromList)
 
-dijkstra :: Ord a => (a -> Bool) -> (a -> [(a, Integer)]) -> [(a, Integer)] -> Maybe (a, Integer)
+dijkstra :: Ord a => (a -> Bool) -> (a -> [(a, Integer)]) -> [(a, Integer)] -> Maybe ([a], Integer)
 dijkstra f g i = go Data.Set.empty iQueue iMap
     where
         iQueue = foldl (\q (k, v) -> Data.PQueue.Prio.Min.insert v k q) Data.PQueue.Prio.Min.empty i
         iMap = Data.Map.fromList i
         go a x d
             | Data.PQueue.Prio.Min.null x = Nothing
-            | f u = Just (u, w)
-            | Data.Set.member u a = go na nx' nd
+            | f u = Just ([u], w)
+            | Data.Set.member u a = fmap (\(w, v) -> (u:w, v)) (go na nx' nd)
             | otherwise = go na nx nd
             where
                 ((w, u), nx') = deleteFindMin x
