@@ -12,8 +12,8 @@ dijkstra f g i = go Data.Set.empty iQueue iMap
         go a x d
             | Data.PQueue.Prio.Min.null x = Nothing
             | f u = Just ([u], w)
-            | Data.Set.member u a = fmap (\(w, v) -> (u:w, v)) (go na nx' nd)
-            | otherwise = go na nx nd
+            | Data.Set.member u a = fmap (\(w', v) -> (u:w', v)) (go na nx' nd)
+            | otherwise = fmap (\(w', v) -> (u:w', v)) (go na nx nd)
             where
                 ((w, u), nx') = deleteFindMin x
                 na = Data.Set.insert u a
